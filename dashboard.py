@@ -38,6 +38,12 @@ def update_cb_doc(id,jeedom_status):
 		logger.warning('UPDATE error : %s' % error)
 		result = cb.n1ql_query(query).execute()
 
+def upsert_doc_from_key(key, jeedom_status):
+	json_doc = cb.get(key).value
+	json_doc["etat"] = jeedom_status
+	json_doc["date"] = datetime.datetime.now()
+ 	cb.upsert(key, json_doc)
+
 def get_jsons_from_type(type):
 	query = N1QLQuery('SELECT * FROM `dashboard` WHERE type=$filtre1', filtre1=type)
 	json_liste = cb.n1ql_query(query)
@@ -45,12 +51,11 @@ def get_jsons_from_type(type):
 	for row in json_liste: 
 		cb_status = row["dashboard"]["etat"]
 		jeedom_status = get_status(row["dashboard"]["id_etat"])
-		id = row["dashboard"]["id_etat"]
 
 		if cb_status != jeedom_status:
-			key = 'key::' + type + '::' + str(row["dashboard"]["id_etat"])
-			print(key)
-			update_cb_doc(id,jeedom_status)
+			id = row["dashboard"]["id_etat"]
+			key = 'key::' + type + '::' + id)
+			upsert_doc_from_key(key,jeedom_status)
 			logger.info('id : %s => %s' % (id, jeedom_status))
 
 def get_status(id):
@@ -58,7 +63,6 @@ def get_status(id):
 	etat = urllib2.urlopen(url).read()
 	return etat
  
-
 ## initialisation de l'acces au bucket et du logger
 cb = Bucket('couchbase://localhost/dashboard')
 logger = init_logger('activity.log',logging.WARNING,logging.DEBUG)
