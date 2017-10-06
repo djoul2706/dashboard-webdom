@@ -57,7 +57,7 @@ def get_jsons_from_type(type):
 			id = row["dashboard"]["id_etat"]
 			key = 'key::' + type + '::' + str(id)
 			upsert_doc_from_key(key,jeedom_status)
-			logger.info('id : %s => %s' % (id, jeedom_status))
+			logger.info('id : %s , cb_status : %s => %s' % (id, cb_status, jeedom_status))
 
 def get_status(id):
 	url = "http://192.168.1.49/core/api/jeeApi.php?apikey=YQFCKcxGJ52BSrHCc73U&type=cmd&id="+str(id)
