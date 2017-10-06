@@ -12,7 +12,6 @@ def init_logger(logfile,loglevel=logging.WARNING,consolelevel=logging.DEBUG):
 	logger = logging.getLogger()
 
 	logger.setLevel(consolelevel)
-	
 	formatter = logging.Formatter('%(asctime)s :: %(levelname)s :: %(message)s')
 
 	file_handler = RotatingFileHandler(logfile, 'a', 1000000, 1)
@@ -27,8 +26,9 @@ def init_logger(logfile,loglevel=logging.WARNING,consolelevel=logging.DEBUG):
 
 	return logger
 
-def get_cb_doc(category="defaut", liste="courses"):
-	json_doc = cb.get('lum_timot').value
+def get_doc_from_key(key):
+	json_doc = cb.get(key).value
+	return json_doc
 
 def update_cb_doc(id,jeedom_status):
 	query = N1QLQuery('UPDATE `dashboard` SET etat=$filtre1 WHERE id_etat=$filtre2', filtre1=str(jeedom_status), filtre2=id)
@@ -41,11 +41,15 @@ def update_cb_doc(id,jeedom_status):
 def get_jsons_from_type(type):
 	query = N1QLQuery('SELECT * FROM `dashboard` WHERE type=$filtre1', filtre1=type)
 	json_liste = cb.n1ql_query(query)
+	
 	for row in json_liste: 
 		cb_status = row["dashboard"]["etat"]
 		jeedom_status = get_status(row["dashboard"]["id_etat"])
 		id = row["dashboard"]["id_etat"]
+
 		if cb_status != jeedom_status:
+			key = 'key::' + type + '::' + row["dashboard"]["id_etat"]
+			print(key)
 			update_cb_doc(id,jeedom_status)
 			logger.info('id : %s => %s' % (id, jeedom_status))
 
@@ -62,6 +66,7 @@ logger = init_logger('activity.log',logging.WARNING,logging.DEBUG)
 while(1):
 	logger.info('comparaison en cours')
 	get_jsons_from_type("lum")
+	get_jsons_from_type("mode")
 	time.sleep(5)
 
 
