@@ -48,7 +48,7 @@ def get_jsons_from_type(type):
 		id = row["dashboard"]["id_etat"]
 
 		if cb_status != jeedom_status:
-			key = 'key::' + type + '::' + row["dashboard"]["id_etat"]
+			key = 'key::' + type + '::' + str(row["dashboard"]["id_etat"])
 			print(key)
 			update_cb_doc(id,jeedom_status)
 			logger.info('id : %s => %s' % (id, jeedom_status))
