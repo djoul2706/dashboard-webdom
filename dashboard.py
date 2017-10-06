@@ -72,6 +72,6 @@ while(1):
 	logger.info('comparaison en cours')
 	get_jsons_from_type("lum")
 	get_jsons_from_type("mode")
-	time.sleep(5)
+	time.sleep(15)
 
 
