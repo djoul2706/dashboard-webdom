@@ -54,7 +54,7 @@ def get_jsons_from_type(type):
 
 		if cb_status != jeedom_status:
 			id = row["dashboard"]["id_etat"]
-			key = 'key::' + type + '::' + id
+			key = 'key::' + type + '::' + str(id)
 			upsert_doc_from_key(key,jeedom_status)
 			logger.info('id : %s => %s' % (id, jeedom_status))
 
