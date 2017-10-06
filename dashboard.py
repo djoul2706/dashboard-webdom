@@ -42,7 +42,7 @@ def update_cb_doc(id,jeedom_status):
 def upsert_doc_from_key(key, jeedom_status):
 	json_doc = cb.get(key).value
 	json_doc["etat"] = jeedom_status
-	json_doc["date"] = str(datetime.now())
+	json_doc["date"] = str(datetime.datetime.now())
  	cb.upsert(key, json_doc)
 
 def get_jsons_from_type(type):
