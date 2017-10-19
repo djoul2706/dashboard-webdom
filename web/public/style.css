@@ -1,0 +1,109 @@
+
+div.page {
+	width:95vw;
+	height:95vh;
+	display: flex;
+	max-width:800px;
+	max-height:480px;
+	margin:auto;
+	background-color: black;
+}
+
+/* Navigation */
+
+nav {
+	display: flex;
+	flex-direction: column;
+	text-align:center;
+	justify-content: space-around;
+	width:15%;
+}
+nav a {
+	padding: 12px;
+}
+.bouton_actif {
+	color:red;
+	border-left: 6px solid red;
+}
+.boutons {
+	color:white;
+	border-left: 6px solid black;
+}
+
+/* contenu de la section */
+
+section {
+	width:100%;
+}
+
+#toptop {
+	height:35%;
+	display: flex;
+}
+
+.top_rubrique {
+	background-color: red;
+	width:75%;
+}
+
+.side_rubrique {
+	width:25%;
+	text-align: center;
+	display: flex;
+	margin:auto;
+	flex-direction: column;
+}
+
+#div_horloge {
+	color:white;
+	font-family: digital7;
+	font-size:70px ;
+	margin:0;
+}
+
+#div_date {
+	color:white;
+	font: 20px Calibri;
+	margin:0;
+}
+
+#containeur
+{
+	height:65%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+div.elements {
+	background-color: blue;
+	height:50%;
+	width:25%;
+}
+
+div.elements_on {
+        height:50%;
+        width:25%;
+	color:yellow;
+	display: flex;
+	flex-direction: column;
+	margin:auto;
+	justify-content: center;
+	text-align: center;
+}
+
+div.elements_off {
+        height:50%;
+        width:25%;
+	color:white;
+        display: flex;
+        flex-direction: column;
+        margin:auto;
+	justify-content: center;
+	text-align: center;
+}
+
+/* polices */
+@font-face {
+	font-family: "digital7";
+	src: url("fonts/digital-7.ttf") format("truetype");
+}

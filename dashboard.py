@@ -4,6 +4,7 @@ import json
 import sys
 import time
 import urllib2
+from sys import argv
 
 import datetime
 import logging
@@ -66,7 +67,13 @@ def get_status(id):
  
 ## initialisation de l'acces au bucket et du logger
 cb = Bucket('couchbase://localhost/dashboard')
-logger = init_logger('activity.log',logging.WARNING,logging.DEBUG)
+logger = init_logger('activity.log',logging.WARNING,logging.WARNING)
+
+
+if (len(sys.argv) > 1):
+	get_jsons_from_type("lum")
+	get_jsons_from_type("mode")
+	exit(0)
 
 while(1):
 	logger.info('comparaison en cours')

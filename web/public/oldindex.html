@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<link rel="stylesheet" href="style.css" />
+    <title>Le titre de la page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+        <script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="scripts.js"></script>
+        <script>
+            var socket = io.connect('http://ztlj.ddns.net:45678');
+	    socket.on('news', function(data){
+		var values = data;
+		alert(values.etat);
+	    });
+        </script>
+</head>
+
+<body>
+<div class="page">
+  <nav>
+	<a href="#" class=bouton_actif id="bt-home" onclick="select_mode(this); return false;"> <i class="fa fa-home fa-3x"></i> </a>
+	<a href="#" class=boutons id="bt-hc" onclick="select_mode(this); return false;"> <i class="fa fa-play fa-3x"></i> </a>
+	<a href="#" class=boutons id="bt-lum" onclick="select_mode(this); return false;"> <i class="fa fa-lightbulb-o fa-3x"></i> </a>
+	<a href="#" class=boutons id="bt-alerte" onclick="select_mode(this); return false;"> <i class="fa fa-warning fa-3x"></i> </a>
+  </nav>
+  <section>
+    <header id="toptop">
+	  <div class=top_rubrique> 
+		<div id="cont_OTIwMTJ8M3w0fDF8M3xCN0I3Qjd8MXxGRkZGRkZ8Y3wx"><div id="spa_OTIwMTJ8M3w0fDF8M3xCN0I3Qjd8MXxGRkZGRkZ8Y3wx"><a id="a_OTIwMTJ8M3w0fDF8M3xCN0I3Qjd8MXxGRkZGRkZ8Y3wx" href="http://www.meteocity.com/france/boulogne-billancourt_v92012/" target="_blank" style="color:#333;text-decoration:none;">Météo Boulogne-Billancourt</a> ©<a href="http://www.meteocity.com">meteocity.com</a></div><script type="text/javascript" src="http://widget.meteocity.com/js/OTIwMTJ8M3w0fDF8M3xCN0I3Qjd8MXxGRkZGRkZ8Y3wx"></script></div>
+	  </div>
+	  <div class=side_rubrique> 
+		<p id="div_horloge">test</p>
+		<p id="div_date">test</p>
+	  </div>
+	</header>
+	<div id="containeur">
+	  <div class=elements id="result"> rubrique 1 </div>
+	  <div class=elements> rubrique 2 </div>
+	  <div class=elements> rubrique 3 </div>
+	  <div class=elements> rubrique 4 </div>
+	  <div class=elements> rubrique 4 </div>
+	  <div class=elements> rubrique 4 </div>
+	</div>
+  </section>
+</div>
+</body>
