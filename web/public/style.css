@@ -40,9 +40,23 @@ section {
 	height:35%;
 	display: flex;
 }
-
+#hh {
+	text-align:left;
+	flex-direction: column;
+	width:75%;
+	margin:auto;
+}
+#previsions {
+	height:100%;
+	width:25%;
+	display:flex;
+	flex-direction: column;
+	text-align:right;
+	justify-content: space-around;
+}
 .top_rubrique {
 	background-color: red;
+	display: flex;
 	width:75%;
 }
 
