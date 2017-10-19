@@ -1,7 +1,11 @@
 
 var socket = io();
 var jsonreq = {"type" : "lum"} ;
-socket.emit('request', jsonreq);
+
+window.onload=function() {
+ getDate('div_horloge', 'div_date');
+ socket.emit('request', jsonreq);
+};
 
 socket.on('news', function(data){
     var values = data;
@@ -65,32 +69,6 @@ function upSertRubrique(jsondoc){
   }
 }
 
-
-function insertRubrique(jsondoc){
-  console.log(jsondoc);
-  var rubrique = document.createElement("div");
-
-  if (jsondoc.etat == "1") { rubrique.className = "elements_on"; }
-  else { console.log(jsondoc); rubrique.className = "elements_off"; }
-
-  var textroom = document.createTextNode(jsondoc.room);     
-  var icon = document.createElement("I");
-  icon.className = "fa fa-lightbulb-o fa-5x";
-  rubrique.appendChild(icon);
-  rubrique.appendChild(textroom);
-
-  rubrique.onclick = function () {
-    if (jsondoc.etat == "1") { socket.emit('urlrequest', jsondoc.id_off ); }
-    else { socket.emit('urlrequest', jsondoc.id_on ); }
-    }
-
-  document.getElementById("containeur").appendChild(rubrique) ;
-};
-
-window.onload=function() {
- getDate('div_horloge', 'div_date');
-};
-
 function getDate(el1,el2) {
   if(typeof el1=="string") { el1 = document.getElementById(el1); }
   if(typeof el2=="string") { el2 = document.getElementById(el2); }
@@ -110,7 +88,6 @@ function getDate(el1,el2) {
 }
 
 // appuie sur un bouton du menu de navigation 
-
 function select_mode(linkElement) {
 	// modification de la classe des boutons pour mettre en avant le bouton clique
 	parent = linkElement.parentNode ;
