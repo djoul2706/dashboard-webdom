@@ -14,8 +14,8 @@ var io = require('socket.io').listen(server);
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 app.use(express.static('public'));
- app.get("/", function(req, res) {
-   res.sendFile('index.html');
+app.get("/", function(req, res) {
+   res.sendFile('/index.html');
  });
 
 io.on('connection', function (socket) {
