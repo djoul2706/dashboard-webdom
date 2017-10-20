@@ -45,7 +45,12 @@ section {
 	flex-direction: column;
 	width:75%;
 	margin:auto;
+	font-size:40px;
 }
+#hh.i {
+	vertical-align: middle;
+}
+
 #previsions {
 	height:100%;
 	width:25%;
@@ -53,6 +58,9 @@ section {
 	flex-direction: column;
 	text-align:right;
 	justify-content: space-around;
+}
+#previsions.i {
+	vertical-align: middle;	
 }
 .top_rubrique {
 	background-color: red;
