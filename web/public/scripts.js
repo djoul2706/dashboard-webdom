@@ -23,10 +23,10 @@ socket.on('meteo', function(data){
 
 function createMeteoCour(meteoJson) {
 	var meteo = document.createElement("div");
-	var temp = document.createTextNode(meteoJson.temp);
+	var temp = document.createTextNode(Math.round(meteoJson.temp));
 	var icon = document.createElement("I");
 	
-	icon.className = getIconClass(meteoJson.id) + " fa-5x";
+	icon.className = getIconClass(meteoJson.id) + " fa-2x";
 	
 	meteo.appendChild(icon);
 	meteo.appendChild(temp);
@@ -36,10 +36,10 @@ function createMeteoCour(meteoJson) {
 
 function createMeteoPrev(meteoJson) {
 	var meteo = document.createElement("div");
-	var temp = document.createTextNode(meteoJson.temp);
+	var temp = document.createTextNode(Math.round(meteoJson.temp) + '\n' + meteoJson.dt_txt);
 	var icon = document.createElement("I");
 	
-	icon.className = getIconClass(meteoJson.id) + " fa-2x";
+	icon.className = getIconClass(meteoJson.id) + " fa-1x";
 	
 	meteo.appendChild(icon);
 	meteo.appendChild(temp);
@@ -56,7 +56,7 @@ function getIconClass(id){
 		case (id<800): return "fa fa-cloud"; //nuages
 		case (id<900): return "fa fa-sun-o"; //soleil ou lune en fonction de l'heure
 		case (id>900): return "fa fa-lightbulb-o"; //eclair
-		default: return "fa fa-refresh fa-spin fa-fw"; //refresh
+		default: return "fa fa-refresh fa-spin"; //refresh
 	}
 }
 
