@@ -12,6 +12,53 @@ socket.on('news', function(data){
     upSertRubrique(values);
 });
 
+socket.on('meteo', function(data){
+    var listeJson = data;
+	updateBG(listeJson[0].temp);
+	createMeteoCour(listeJson[0]);
+	for (i = 1; i < listeJson.length; i++) {
+		createMeteoPrev(listeJson[i]);
+	}
+});	
+
+createMeteoCour(meteoJson) {
+	var meteo = document.createElement("div");
+	var temp = document.createTextNode(meteoJson.temp);
+	var icon = document.createElement("I");
+	
+	icon.className = getIconClass(meteoJson.id) + "fa-10x";
+	
+	meteo.appendChild(icon);
+	meteo.appendChild(temp);
+	
+	document.getElementById("hh").appendChild(meteo) ;
+}
+
+createMeteoPrev(meteoJson) {
+	var meteo = document.createElement("div");
+	var temp = document.createTextNode(meteoJson.temp);
+	var icon = document.createElement("I");
+	
+	icon.className = getIconClass(meteoJson.id) + "fa-3x";
+	
+	meteo.appendChild(icon);
+	meteo.appendChild(temp);
+	
+	document.getElementById("previsions").appendChild(meteo) ;	
+}
+
+function getIconClass(id){
+	switch (id) {
+		case (id<300): return "fa-bolt"; //eclair
+		case (id<600): return "fa fa-tint"; //pluie
+		case (id<700): return "fa fa-snowflake-o"; //neige
+		case (id<800): return "fa fa-cloud"; //nuages
+		case (id<900): return "fa fa-sun-o"; //soleil ou lune en fonction de l'heure
+		case (id>900): return "fa fa-lightbulb-o"; //eclair
+		default: return "fa fa-refresh fa-spin fa-fw"; //refresh
+	}
+}
+
 function updateLum(jsondoc, rubrique){
   // changement de l'etat 
   if (jsondoc.etat == "1") { rubrique.className = "elements_on"; }
