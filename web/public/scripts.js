@@ -14,19 +14,19 @@ socket.on('news', function(data){
 
 socket.on('meteo', function(data){
     var listeJson = data;
-	updateBG(listeJson[0].temp);
+//	updateBG(listeJson[0].temp);
 	createMeteoCour(listeJson[0]);
 	for (i = 1; i < listeJson.length; i++) {
 		createMeteoPrev(listeJson[i]);
 	}
 });	
 
-createMeteoCour(meteoJson) {
+function createMeteoCour(meteoJson) {
 	var meteo = document.createElement("div");
 	var temp = document.createTextNode(meteoJson.temp);
 	var icon = document.createElement("I");
 	
-	icon.className = getIconClass(meteoJson.id) + "fa-10x";
+	icon.className = getIconClass(meteoJson.id) + " fa-5x";
 	
 	meteo.appendChild(icon);
 	meteo.appendChild(temp);
@@ -34,12 +34,12 @@ createMeteoCour(meteoJson) {
 	document.getElementById("hh").appendChild(meteo) ;
 }
 
-createMeteoPrev(meteoJson) {
+function createMeteoPrev(meteoJson) {
 	var meteo = document.createElement("div");
 	var temp = document.createTextNode(meteoJson.temp);
 	var icon = document.createElement("I");
 	
-	icon.className = getIconClass(meteoJson.id) + "fa-3x";
+	icon.className = getIconClass(meteoJson.id) + " fa-2x";
 	
 	meteo.appendChild(icon);
 	meteo.appendChild(temp);
@@ -48,7 +48,8 @@ createMeteoPrev(meteoJson) {
 }
 
 function getIconClass(id){
-	switch (id) {
+	console.log('id de la meteo = '+id);
+	switch (true) {
 		case (id<300): return "fa-bolt"; //eclair
 		case (id<600): return "fa fa-tint"; //pluie
 		case (id<700): return "fa fa-snowflake-o"; //neige

@@ -50,9 +50,10 @@ io.on('connection', function (socket) {
    
 function getJsonMeteo(){
   query = N1qlQuery.fromString('SELECT prevision.dt, prevision.main.temp, prevision.weather[0].description, prevision.weather[0].id, prevision.dt_txt' +
-'FROM `dashboard` as d unnest d.list as prevision LIMIT 4');
+' FROM `dashboard` as d unnest d.list as prevision LIMIT 4');
   bucket.query(query, function(err, rows, meta) {
-    if (err) throw err;
+	console.log(rows);
+    //if (err) throw err;
     socket.emit('meteo', rows);
   });
 }
