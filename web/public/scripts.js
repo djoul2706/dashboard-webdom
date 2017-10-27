@@ -15,13 +15,36 @@ socket.on('news', function(data){
 socket.on('meteo', function(data){
     var listeJson = data;
 //	updateBG(listeJson[0].temp);
+	document.getElementById("BGcolor").style.background = getBGcolor(listeJson[0].temp);
+
+	var elem = document.getElementById("hh");
+	while (elem.firstChild) { elem.removeChild(elem.firstChild) }
+
+	var elem = document.getElementById("previsions");
+	while (elem.firstChild) { elem.removeChild(elem.firstChild) }
+
 	createMeteoCour(listeJson[0]);
 	for (i = 1; i < listeJson.length; i++) {
 		createMeteoPrev(listeJson[i]);
 	}
 });	
 
+function getBGcolor(temp){
+
+  switch (true) {
+    case (temp<0): return "#4040a1"; // bleu fonce
+    case (temp<5): return "#034f84"; //bleu
+    case (temp<10): return "#80ced6"; //bleu claire
+    case (temp<15): return "#d5f4e6"; //turquoise
+    case (temp<20): return "#fefbd8"; //beige 
+    case (temp<25): return "#82b74b"; //vert
+    case (temp>24): return "#f18973"; //orange 
+    default: return "#fefbd8"; //beige
+  }
+}
+
 function createMeteoCour(meteoJson) {
+	var elem = document.getElementById("hh");
 	var meteo = document.createElement("div");
 	var temp = document.createTextNode(Math.round(meteoJson.temp));
 	var icon = document.createElement("I");
@@ -31,7 +54,7 @@ function createMeteoCour(meteoJson) {
 	meteo.appendChild(icon);
 	meteo.appendChild(temp);
 	
-	document.getElementById("hh").appendChild(meteo) ;
+	elem.appendChild(meteo) ;
 }
 
 function createMeteoPrev(meteoJson) {

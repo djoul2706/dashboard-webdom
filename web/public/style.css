@@ -7,6 +7,7 @@ div.page {
 	max-height:480px;
 	margin:auto;
 	background-color: black;
+	color: grey;
 }
 
 /* Navigation */
@@ -26,7 +27,7 @@ nav a {
 	border-left: 6px solid red;
 }
 .boutons {
-	color:white;
+	#color:white;
 	border-left: 6px solid black;
 }
 
@@ -63,7 +64,7 @@ section {
 	vertical-align: middle;	
 }
 .top_rubrique {
-	background-color: red;
+	#background-color: red;
 	display: flex;
 	width:75%;
 }
@@ -77,14 +78,14 @@ section {
 }
 
 #div_horloge {
-	color:white;
+	#color:white;
 	font-family: digital7;
 	font-size:70px ;
 	margin:0;
 }
 
 #div_date {
-	color:white;
+	#color:white;
 	font: 20px Calibri;
 	margin:0;
 }
@@ -116,7 +117,7 @@ div.elements_on {
 div.elements_off {
         height:50%;
         width:25%;
-	color:white;
+	#color:white;
         display: flex;
         flex-direction: column;
         margin:auto;
