@@ -46,10 +46,11 @@ function getBGcolor(temp){
 function createMeteoCour(meteoJson) {
 	var elem = document.getElementById("hh");
 	var meteo = document.createElement("div");
-	var temp = document.createTextNode(Math.round(meteoJson.temp));
+	var temp = document.createTextNode(Math.round(meteoJson.temp) + "°");
 	var icon = document.createElement("I");
 	
-	icon.className = getIconClass(meteoJson.id) + " fa-2x";
+	icon.className = getIconClass(meteoJson.id) + " fa-1x";
+	icon.style.margin = "0px 30px";
 	
 	meteo.appendChild(icon);
 	meteo.appendChild(temp);
@@ -59,11 +60,18 @@ function createMeteoCour(meteoJson) {
 
 function createMeteoPrev(meteoJson) {
 	var meteo = document.createElement("div");
-	var temp = document.createTextNode(Math.round(meteoJson.temp) + '\n' + meteoJson.dt_txt);
+
+	var htime = (meteoJson.dt_txt).slice(11,13)+ 'h :' ;
+	var etime = document.createElement("I");
+	etime.appendChild(document.createTextNode(htime));
+	etime.style.fontSize = "50%";
+	
+	var temp = document.createTextNode(Math.round(meteoJson.temp) + '° ');
 	var icon = document.createElement("I");
-	
 	icon.className = getIconClass(meteoJson.id) + " fa-1x";
-	
+	icon.style.margin = "0px 10px";
+
+	meteo.appendChild(etime);
 	meteo.appendChild(icon);
 	meteo.appendChild(temp);
 	
@@ -145,14 +153,14 @@ function getDate(el1,el2) {
   if(typeof el2=="string") { el2 = document.getElementById(el2); }
   function actualiser() {
     var monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"];
-    var dayNames = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
+    var dayNames = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ];
     var date = new Date();
     var dayIndex = date.getDay();
     var day = date.getDate();
     var monthIndex = date.getMonth();
     var year = date.getFullYear();
     el1.innerHTML = date.getHours()+':'+(date.getMinutes()<10?'0':'')+date.getMinutes();
-    el2.innerHTML = dayNames[dayIndex - 1] + ' ' + day + ' ' + monthNames[monthIndex] ; // + ' ' + year;
+    el2.innerHTML = dayNames[dayIndex] + ' ' + day + ' ' + monthNames[monthIndex] ; // + ' ' + year;
     }
   actualiser();
   setInterval(actualiser,30000);
